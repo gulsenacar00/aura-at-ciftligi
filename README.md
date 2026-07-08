@@ -10,11 +10,17 @@ Aura At Çiftliği için statik web sitesi.
 
 ## Yerel çalıştırma
 
+**En kolay yol:** `baslat.bat` dosyasına çift tıklayın.
+
+Veya terminalde:
+
 ```bash
-npx serve
+npx serve -l 3000
 ```
 
 Ardından tarayıcıda `http://localhost:3000` adresini açın.
+
+> `npx` çalışmıyorsa Node.js kurulu olmayabilir. [nodejs.org](https://nodejs.org) adresinden LTS sürümünü kurun ve terminali yeniden açın.
 
 ## GitHub Pages
 
