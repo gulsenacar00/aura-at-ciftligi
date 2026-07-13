@@ -11,6 +11,14 @@ const LIMITS = {
   message: 2000,
 };
 
+const GALLERY_IMAGES = [
+  { src: "images/hero.jpg", alt: "Çiftlikte koşan atlar" },
+  { src: "images/about.png", alt: "At portresi" },
+  { src: "images/stable.jpg", alt: "Ahır ve çiftlik alanı" },
+  { src: "images/nature-tour.jpg", alt: "Doğa turu manzarası" },
+  { src: "images/family.png", alt: "Aile günü etkinliği" },
+];
+
 const DEFAULT_ERROR =
   "Mesaj gönderilemedi. Lütfen tekrar deneyin veya doğrudan e-posta atın.";
 
@@ -56,16 +64,103 @@ function isSuccessfulResponse(result) {
   return result && (result.success === true || result.success === "true");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function initMenu() {
   const menuToggle = document.querySelector(".menu-toggle");
   const navList = document.querySelector(".nav-list");
 
-  if (menuToggle && navList) {
-    menuToggle.addEventListener("click", () => {
-      navList.classList.toggle("open");
-    });
+  if (!menuToggle || !navList) {
+    return;
   }
 
+  menuToggle.addEventListener("click", () => {
+    navList.classList.toggle("open");
+  });
+
+  navList.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navList.classList.remove("open");
+    });
+  });
+}
+
+function initNavHighlight() {
+  const navLinks = document.querySelectorAll(".nav-link");
+  const sections = document.querySelectorAll("section[id]");
+
+  if (!navLinks.length || !sections.length) {
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        const id = entry.target.id;
+        navLinks.forEach((link) => {
+          link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+        });
+      });
+    },
+    { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+}
+
+function initGallery() {
+  const imageEl = document.getElementById("gallery-image");
+  const counterEl = document.getElementById("gallery-counter");
+  const prevBtn = document.getElementById("gallery-prev");
+  const nextBtn = document.getElementById("gallery-next");
+
+  if (!imageEl || !counterEl || !prevBtn || !nextBtn) {
+    return;
+  }
+
+  let currentIndex = 0;
+
+  function updateGallery(index) {
+    currentIndex = (index + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+    const item = GALLERY_IMAGES[currentIndex];
+
+    imageEl.classList.add("is-changing");
+    imageEl.src = item.src;
+    imageEl.alt = item.alt;
+    counterEl.textContent = `${currentIndex + 1} / ${GALLERY_IMAGES.length}`;
+
+    imageEl.onload = () => imageEl.classList.remove("is-changing");
+  }
+
+  prevBtn.addEventListener("click", () => updateGallery(currentIndex - 1));
+  nextBtn.addEventListener("click", () => updateGallery(currentIndex + 1));
+
+  document.addEventListener("keydown", (event) => {
+    const gallery = document.getElementById("galeri");
+    if (!gallery) {
+      return;
+    }
+
+    const rect = gallery.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+
+    if (!inView) {
+      return;
+    }
+
+    if (event.key === "ArrowLeft") {
+      updateGallery(currentIndex - 1);
+    }
+
+    if (event.key === "ArrowRight") {
+      updateGallery(currentIndex + 1);
+    }
+  });
+}
+
+function initContactForm() {
   const contactForm = document.getElementById("contact-form");
   const formSuccess = document.getElementById("form-success");
   const formError = document.getElementById("form-error");
@@ -159,4 +254,11 @@ document.addEventListener("DOMContentLoaded", () => {
       submitBtn.textContent = "Gönder";
     }
   });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initMenu();
+  initNavHighlight();
+  initGallery();
+  initContactForm();
 });

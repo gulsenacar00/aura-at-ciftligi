@@ -4,29 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Aura At Çiftliği - Doğayla iç içe binicilik ve at bakım deneyimi.">
-  <title>Aura At Çiftliği | Anasayfa</title>
+  <title>Aura At Çiftliği</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="logo">
+      <a href="#anasayfa" class="logo">
         <img src="images/logo.jpg" alt="Aura At Çiftliği Logo" class="logo-image">
         Aura At Çiftliği
       </a>
       <button class="menu-toggle" aria-label="Menüyü aç/kapat">☰</button>
       <nav>
         <ul class="nav-list">
-          <li><a href="index.html" class="active">Anasayfa</a></li>
-          <li><a href="hakkimda.html">Hakkında</a></li>
-          <li><a href="iletisim.html">İletişim</a></li>
+          <li><a href="#anasayfa" class="nav-link active">Anasayfa</a></li>
+          <li><a href="#hakkimda" class="nav-link">Hakkında</a></li>
+          <li><a href="#iletisim" class="nav-link">İletişim</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero">
+    <section class="hero" id="anasayfa">
       <div class="container hero-grid">
         <div class="hero-content">
           <span class="hero-badge">Doğanın Kalbinde</span>
@@ -36,8 +36,8 @@
             unutulmaz anılar biriktirin. Her yaştan misafirimizi sıcak bir karşılama bekliyor.
           </p>
           <div class="hero-actions">
-            <a href="iletisim.html" class="btn btn-primary">Bize Ulaşın</a>
-            <a href="hakkimda.html" class="btn btn-secondary">Hikayemizi Keşfedin</a>
+            <a href="#iletisim" class="btn btn-primary">Bize Ulaşın</a>
+            <a href="#hakkimda" class="btn btn-secondary">Hikayemizi Keşfedin</a>
           </div>
         </div>
         <div class="hero-visual">
@@ -95,38 +95,131 @@
       </div>
     </section>
 
-    <section class="gallery">
+    <section class="about" id="hakkimda">
+      <div class="container">
+        <div class="section-title">
+          <h2>Hakkımızda</h2>
+          <p>At sevgisiyle kurulan Aura At Çiftliği, doğa ve binicilik tutkusunu bir araya getiriyor.</p>
+        </div>
+        <div class="about-grid">
+          <figure class="about-image">
+            <img src="images/about.png" alt="Aura At Çiftliği'nde bir at">
+          </figure>
+          <div class="about-content">
+            <h3>Hikayemiz</h3>
+            <p>
+              Aura At Çiftliği, 2026 yılında at sevgisiyle yola çıkan küçük bir aile işletmesi olarak kuruldu.
+              Amacımız, şehir hayatının stresinden uzaklaşmak isteyen herkese atlara dokunma, onları tanıma
+              ve doğayla bağ kurma fırsatı sunmak.
+            </p>
+            <p>
+              Çiftliğimizde her atın bir ismi, bir karakteri ve özel bir hikayesi var. Onlara en iyi bakımı
+              sağlamak, misafirlerimize güvenli ve keyifli bir deneyim sunmak en büyük önceliğimiz.
+            </p>
+            <p>
+              Bugün binicilik derslerinden doğa turlarına, çocuk atölyelerinden at bakım eğitimlerine kadar
+              geniş bir hizmet yelpazesi sunuyoruz.
+            </p>
+          </div>
+        </div>
+        <div class="values-grid">
+          <div class="value-item">
+            <h3>Sevgi &amp; Saygı</h3>
+            <p>Tüm atlara ve misafirlerimize eşit ölçüde sevgi ve saygıyla yaklaşıyoruz.</p>
+          </div>
+          <div class="value-item">
+            <h3>Güvenlik</h3>
+            <p>Her etkinlikte güvenlik standartlarına titizlikle uyuyoruz.</p>
+          </div>
+          <div class="value-item">
+            <h3>Doğa Dostu</h3>
+            <p>Çevreye duyarlı uygulamalarla sürdürülebilir bir çiftlik işletiyoruz.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery" id="galeri">
       <div class="container">
         <div class="section-title">
           <h2>Çiftlikten Kareler</h2>
           <p>Atlarımız, doğal ortamımız ve misafirlerimizden anlar.</p>
         </div>
-        <div class="gallery-grid">
-          <figure class="gallery-item gallery-item-large">
-            <img src="images/hero.jpg" alt="Çiftlikte koşan atlar">
+        <div class="gallery-slider">
+          <button type="button" class="gallery-btn gallery-prev" id="gallery-prev" aria-label="Önceki fotoğraf">&#10094;</button>
+          <figure class="gallery-slide">
+            <img src="images/hero.jpg" alt="Çiftlikte koşan atlar" id="gallery-image">
           </figure>
-          <figure class="gallery-item">
-            <img src="images/about.png" alt="At portresi">
-          </figure>
-          <figure class="gallery-item">
-            <img src="images/stable.jpg" alt="Ahır ve çiftlik alanı">
-          </figure>
-          <figure class="gallery-item">
-            <img src="images/stable.jpg" alt="Yeşil çiftlik manzarası">
-          </figure>
-          <figure class="gallery-item gallery-item-wide">
-            <img src="images/nature-tour.jpg" alt="Doğa turu manzarası">
-          </figure>
+          <button type="button" class="gallery-btn gallery-next" id="gallery-next" aria-label="Sonraki fotoğraf">&#10095;</button>
         </div>
+        <p class="gallery-counter" id="gallery-counter">1 / 5</p>
       </div>
     </section>
 
-    <section>
+    <section class="contact" id="iletisim">
       <div class="container">
-        <div class="cta-banner">
-          <h2>Çiftliğimizi ziyaret etmeye hazır mısınız?</h2>
-          <p>Randevu almak veya sorularınız için bizimle iletişime geçin.</p>
-          <a href="iletisim.html" class="btn btn-primary">İletişime Geç</a>
+        <div class="section-title">
+          <h2>İletişim</h2>
+          <p>Randevu almak veya sorularınızı sormak için formu doldurun ya da doğrudan bize ulaşın.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <div class="info-card">
+              <div class="info-icon">📍</div>
+              <div>
+                <h3>Adres</h3>
+                <p>Mersin, Türkiye</p>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-icon">📞</div>
+              <div>
+                <h3>Telefon</h3>
+                <p>+90 543 633 86 01<br>Pazartesi – Pazar: 09:00 – 18:00</p>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-icon">✉️</div>
+              <div>
+                <h3>E-posta</h3>
+                <p>gulsenacar888@gmail.com</p>
+              </div>
+            </div>
+          </div>
+
+          <form class="contact-form" id="contact-form" data-form-email="gulsenacar888@gmail.com">
+            <h3>Mesaj Gönderin</h3>
+            <div class="honeypot" aria-hidden="true">
+              <label for="website">Web sitesi</label>
+              <input type="text" id="website" name="_honey" tabindex="-1" autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label for="name">Ad Soyad</label>
+              <input type="text" id="name" name="name" required maxlength="100" placeholder="Adınız ve soyadınız">
+            </div>
+            <div class="form-group">
+              <label for="email">E-posta</label>
+              <input type="email" id="email" name="email" required maxlength="254" placeholder="ornek@email.com">
+            </div>
+            <div class="form-group">
+              <label for="subject">Konu</label>
+              <select id="subject" name="subject" required>
+                <option value="">Konu seçin</option>
+                <option value="binicilik">Binicilik Dersi</option>
+                <option value="tur">Doğa Turu</option>
+                <option value="aile">Aile Günü</option>
+                <option value="diger">Diğer</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Mesajınız</label>
+              <textarea id="message" name="message" required maxlength="2000" placeholder="Mesajınızı buraya yazın..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submit-btn">Gönder</button>
+            <p class="form-success" id="form-success">Mesajınız gönderildi! En kısa sürede size dönüş yapacağız.</p>
+            <p class="form-error" id="form-error">Mesaj gönderilemedi. Lütfen tekrar deneyin veya doğrudan e-posta atın.</p>
+            <p class="form-privacy">Gönderdiğiniz bilgiler güvenli bağlantı ile FormSubmit servisi aracılığıyla iletilir.</p>
+          </form>
         </div>
       </div>
     </section>
@@ -143,11 +236,12 @@
           <p>Doğayla uyum içinde, atlara sevgiyle yaklaşan bir çiftlik deneyimi.</p>
         </div>
         <div class="footer-links">
-          <h4>Sayfalar</h4>
+          <h4>Bölümler</h4>
           <ul>
-            <li><a href="index.html">Anasayfa</a></li>
-            <li><a href="hakkimda.html">Hakkında</a></li>
-            <li><a href="iletisim.html">İletişim</a></li>
+            <li><a href="#anasayfa">Anasayfa</a></li>
+            <li><a href="#hakkimda">Hakkında</a></li>
+            <li><a href="#galeri">Galeri</a></li>
+            <li><a href="#iletisim">İletişim</a></li>
           </ul>
         </div>
         <div class="footer-links">
