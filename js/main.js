@@ -113,6 +113,7 @@ function initNavHighlight() {
 function initGallery() {
   const imageEl = document.getElementById("gallery-image");
   const counterEl = document.getElementById("gallery-counter");
+  const thumbsWrapEl = document.querySelector(".gallery-thumbs-wrap");
   const thumbsEl = document.getElementById("gallery-thumbs");
   const prevBtn = document.getElementById("gallery-prev");
   const nextBtn = document.getElementById("gallery-next");
@@ -121,20 +122,25 @@ function initGallery() {
     return;
   }
 
+  const thumbButtons = Array.from(thumbsEl.querySelectorAll(".gallery-thumb"));
   let currentIndex = 0;
-  const thumbButtons = [];
 
-  GALLERY_IMAGES.forEach((item, index) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "gallery-thumb";
-    button.setAttribute("aria-label", `${index + 1}. fotoğraf: ${item.alt}`);
-    button.innerHTML = `<img src="${item.src}" alt="">`;
+  function scrollToActiveThumb() {
+    const activeThumb = thumbButtons[currentIndex];
+    if (!activeThumb || !thumbsWrapEl) {
+      return;
+    }
 
-    button.addEventListener("click", () => updateGallery(index));
-    thumbsEl.appendChild(button);
-    thumbButtons.push(button);
-  });
+    const wrapRect = thumbsWrapEl.getBoundingClientRect();
+    const thumbRect = activeThumb.getBoundingClientRect();
+    const offset =
+      thumbRect.left -
+      wrapRect.left -
+      wrapRect.width / 2 +
+      thumbRect.width / 2;
+
+    thumbsWrapEl.scrollBy({ left: offset, behavior: "smooth" });
+  }
 
   function updateGallery(index) {
     currentIndex = (index + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
@@ -149,10 +155,17 @@ function initGallery() {
       button.classList.toggle("active", i === currentIndex);
     });
 
+    scrollToActiveThumb();
+
     imageEl.onload = () => imageEl.classList.remove("is-changing");
   }
 
-  updateGallery(0);
+  thumbButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.index);
+      updateGallery(index);
+    });
+  });
 
   prevBtn.addEventListener("click", () => updateGallery(currentIndex - 1));
   nextBtn.addEventListener("click", () => updateGallery(currentIndex + 1));
