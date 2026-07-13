@@ -113,14 +113,28 @@ function initNavHighlight() {
 function initGallery() {
   const imageEl = document.getElementById("gallery-image");
   const counterEl = document.getElementById("gallery-counter");
+  const thumbsEl = document.getElementById("gallery-thumbs");
   const prevBtn = document.getElementById("gallery-prev");
   const nextBtn = document.getElementById("gallery-next");
 
-  if (!imageEl || !counterEl || !prevBtn || !nextBtn) {
+  if (!imageEl || !counterEl || !thumbsEl || !prevBtn || !nextBtn) {
     return;
   }
 
   let currentIndex = 0;
+  const thumbButtons = [];
+
+  GALLERY_IMAGES.forEach((item, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "gallery-thumb";
+    button.setAttribute("aria-label", `${index + 1}. fotoğraf: ${item.alt}`);
+    button.innerHTML = `<img src="${item.src}" alt="">`;
+
+    button.addEventListener("click", () => updateGallery(index));
+    thumbsEl.appendChild(button);
+    thumbButtons.push(button);
+  });
 
   function updateGallery(index) {
     currentIndex = (index + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
@@ -131,8 +145,14 @@ function initGallery() {
     imageEl.alt = item.alt;
     counterEl.textContent = `${currentIndex + 1} / ${GALLERY_IMAGES.length}`;
 
+    thumbButtons.forEach((button, i) => {
+      button.classList.toggle("active", i === currentIndex);
+    });
+
     imageEl.onload = () => imageEl.classList.remove("is-changing");
   }
+
+  updateGallery(0);
 
   prevBtn.addEventListener("click", () => updateGallery(currentIndex - 1));
   nextBtn.addEventListener("click", () => updateGallery(currentIndex + 1));
